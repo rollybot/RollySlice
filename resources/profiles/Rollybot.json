@@ -1,0 +1,76 @@
+{
+  "name": "Rollybot",
+  "version": "01.00.00.02",
+  "force_update": "0",
+  "description": "Rollybot configurations",
+  "machine_model_list": [
+      {   "name": "DeltaSquare T24", 
+	      "sub_path": "machine/DeltaSquare T24.json" 
+	  },
+	  {   "name": "DeltaSquare T1", 
+	      "sub_path": "machine/DeltaSquare T1.json" 
+	  },
+	  {   "name": "DeltaSquare A0", 
+	      "sub_path": "machine/DeltaSquare A0.json" 
+	  },
+	  {   "name": "Zcube 300", 
+	      "sub_path": "machine/Zcube 300.json" 
+	  }
+  ],
+  "process_list": [
+      {
+		  "name": "fdm_process_common",
+		  "sub_path": "process/fdm_process_common.json"
+	  },
+	  {
+		  "name": "0.20mm Standard @DeltaSquare_T24",
+		  "sub_path": "process/0.20mm Standard @DeltaSquare_T24.json"
+	  },
+	  {
+		  "name": "0.20mm Standard @DeltaSquare_T1",
+		  "sub_path": "process/0.20mm Standard @DeltaSquare_T1.json"
+	  },
+	  {
+		  "name": "0.20mm Standard @DeltaSquare_A0",
+		  "sub_path": "process/0.20mm Standard @DeltaSquare_A0.json"
+	  },
+	  {
+		  "name": "0.20mm Standard @Zcube_300",
+		  "sub_path": "process/0.20mm Standard @Zcube_300.json"
+	  }
+  ],
+  "filament_list": [
+      {
+		  "name": "fdm_filament_common",
+		  "sub_path": "filament/fdm_filament_common.json"
+	  },
+	  {   "name": "fdm_filament_pla", 
+	      "sub_path": "filament/fdm_filament_pla.json" 
+	  },
+	  {   "name": "Rollybot Generic PLA", 
+	      "sub_path": "filament/Rollybot Generic PLA.json"
+	  }
+  ],
+  "machine_list": [
+      {
+		  "name": "fdm_machine_common",
+		  "sub_path": "machine/fdm_machine_common.json"
+	  },
+      { 
+	      "name": "DeltaSquare T24 0.4 nozzle", 
+	      "sub_path": "machine/DeltaSquare T24 0.4 nozzle.json" 
+	  },
+	  { 
+	      "name": "DeltaSquare T1 0.4 nozzle", 
+	      "sub_path": "machine/DeltaSquare T1 0.4 nozzle.json" 
+	  },
+	  { 
+	      "name": "DeltaSquare A0 0.4 nozzle", 
+	      "sub_path": "machine/DeltaSquare A0 0.4 nozzle.json" 
+	  },
+	  { 
+	      "name": "Zcube 300 0.4 nozzle", 
+	      "sub_path": "machine/Zcube 300 0.4 nozzle.json" 
+	  }
+  ]
+}

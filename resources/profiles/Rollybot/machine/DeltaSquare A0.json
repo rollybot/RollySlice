@@ -1,0 +1,12 @@
+{
+  "type": "machine_model",
+  "name": "DeltaSquare A0",
+  "model_id": "DeltaSquare_A0",
+  "nozzle_diameter": "0.4",
+  "machine_tech": "FFF",
+  "family": "Rollybot",
+  "bed_model": "deltasquare_a0_buildplate_model.stl",
+  "bed_texture": "deltasquare_a0_buildplate_texture.png",
+  "hotend_model": "",
+  "default_materials": "Rollybot Generic PLA"
+}

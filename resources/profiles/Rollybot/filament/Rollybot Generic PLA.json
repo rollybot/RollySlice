@@ -1,0 +1,14 @@
+{
+    "type": "filament",
+    "name": "Rollybot Generic PLA",
+    "inherits": "fdm_filament_pla",
+    "from": "system",
+    "setting_id": "RB_GENERIC_PLA",
+    "instantiation": "true",
+    "filament_id": "RBGPLA",
+    "compatible_printers": [],
+	"nozzle_temperature": ["205"],
+	"nozzle_temperature_initial_layer": ["210"],
+	"hot_plate_temp_initial_layer": ["50"],
+	"hot_plate_temp": ["50"]
+}

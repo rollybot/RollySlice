@@ -1,0 +1,12 @@
+{
+  "type": "machine_model",
+  "name": "Zcube 300",
+  "model_id": "Zcube_300",
+  "nozzle_diameter": "0.4",
+  "machine_tech": "FFF",
+  "family": "Rollybot",
+  "bed_model": "",
+  "bed_texture": "",
+  "hotend_model": "",
+  "default_materials": "Rollybot Generic PLA"
+}
