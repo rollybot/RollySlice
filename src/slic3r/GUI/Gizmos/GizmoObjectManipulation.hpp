@@ -172,6 +172,7 @@ private:
     // change values
     void change_position_value(int axis, double value);
     void change_rotation_value(int axis, double value);
+    void rotate_by_degrees(int axis, double degrees);      // added by rollybot
     void change_absolute_rotation_value(int axis, double value);
     void change_scale_value(int axis, double value);
     void change_size_value(int axis, double value);
