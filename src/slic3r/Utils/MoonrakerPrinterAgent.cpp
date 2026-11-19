@@ -1851,7 +1851,7 @@ void MoonrakerPrinterAgent::run_status_stream(std::string dev_id, std::string ba
             identify["params"]["client_name"] = "OrcaSlicer";
             identify["params"]["version"]     = MoonrakerPrinterAgent_VERSION;
             identify["params"]["type"]        = "agent";
-            identify["params"]["url"]         = "https://github.com/SoftFever/OrcaSlicer";
+            identify["params"]["url"]         = "https://github.com/rollybot/RollySlice";
             identify["id"]                    = 0;
             const std::string identify_payload = identify.dump();
             if (const auto ec = run([&](auto&& handler) { ws.async_write(net::buffer(identify_payload), handler); })) {
