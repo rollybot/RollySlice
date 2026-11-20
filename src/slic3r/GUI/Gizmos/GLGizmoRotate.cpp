@@ -161,6 +161,22 @@ void GLGizmoRotate::on_dragging(const UpdateData &data)
     m_angle = theta;
 }
 
+int GLGizmoRotate::get_arrow_side(const UpdateData &data) const
+{
+    const Vec2d mouse_pos = to_2d(mouse_position_in_local_plane(data.mouse_ray));
+
+    const double grabber_radius = (double)m_radius * (1.0 + (double)GrabberOffset);
+    const Vec2d  center(::cos(m_angle) * grabber_radius, ::sin(m_angle) * grabber_radius);
+    const Vec2d  tangent(-::sin(m_angle), ::cos(m_angle)); // 각도가 증가하는 방향
+
+    const double along     = (mouse_pos - center).dot(tangent);
+    const double threshold = 0.04 * (double)m_radius;      // 큐브 크기에 해당. 테스트하며 조정
+
+    if (std::abs(along) < threshold)
+        return 0;
+    return along > 0.0 ? 1 : -1;
+}
+
 void GLGizmoRotate::on_render()
 {
     if (!m_grabbers.front().enabled)
