@@ -557,7 +557,17 @@ GLGizmoRotate3D::GLGizmoRotate3D(GLCanvas3D& parent, const std::string& icon_fil
 
 bool GLGizmoRotate3D::on_mouse(const wxMouseEvent &mouse_event)
 {
-    if (mouse_event.Dragging() && m_dragging) {
+    // 추가: 드래그가 시작되면 클릭이 아님
+    if (mouse_event.Dragging() && m_dragging)
+        m_click_arrow_side = 0;
+
+    // 추가: 화살표를 누르고 그냥 뗐다면 해당 축 각도를 ±90도로 설정
+    const bool apply_click = mouse_event.LeftUp() && m_dragging && m_click_arrow_side != 0
+                             && m_hover_id >= 0 && m_hover_id < 3;
+    if (apply_click)
+        m_gizmos[m_hover_id].set_angle(m_click_arrow_side * (M_PI / 2.0));
+
+    if ((mouse_event.Dragging() && m_dragging) || apply_click) { // 수정: || apply_click
         // Apply new temporary rotations
         TransformationType transformation_type;
         if (m_parent.get_selection().is_wipe_tower())
@@ -575,6 +585,22 @@ bool GLGizmoRotate3D::on_mouse(const wxMouseEvent &mouse_event)
             transformation_type.set_independent();
         m_parent.get_selection().rotate(get_rotation(), transformation_type);
     }
+
+    // 추가: 눌렀을 때 어느 화살표인지 기록 (use_grabbers가 start_dragging까지 처리한 뒤에 계산)
+    if (mouse_event.LeftDown()) {
+        const bool handled = use_grabbers(mouse_event);
+        m_click_arrow_side = 0;
+        if (m_dragging && m_hover_id >= 0 && m_hover_id < 3) {
+            Point mouse_coord(mouse_event.GetX(), mouse_event.GetY());
+            UpdateData data(m_parent.mouse_ray(mouse_coord), mouse_coord);
+            m_click_arrow_side = m_gizmos[m_hover_id].get_arrow_side(data);
+        }
+        return handled;
+    }
+
+    if (apply_click)
+        m_click_arrow_side = 0;
+
     return use_grabbers(mouse_event);
 }
 
