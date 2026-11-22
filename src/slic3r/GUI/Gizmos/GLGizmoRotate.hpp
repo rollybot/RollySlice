@@ -76,6 +76,9 @@ public:
     double get_angle() const { return m_angle; }
     void set_angle(double angle);
 
+    // 클릭 지점이 큐브 기준 어느 쪽 화살표인지: +1, -1, 큐브면 0
+    int get_arrow_side(const UpdateData &data) const;
+
     std::string get_tooltip() const override;
 
     void set_group_id(int group_id) { m_group_id = group_id; }
@@ -186,6 +189,7 @@ protected:
 
 private:
     const GLVolume *m_last_volume;
+    int m_click_arrow_side = 0;      // 추가
     class RotoptimzeWindow
     {
         ImGuiWrapper *m_imgui = nullptr;

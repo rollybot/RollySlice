@@ -377,6 +377,36 @@ void GizmoObjectManipulation::change_rotation_value(int axis, double value)
     this->UpdateAndShow(true);
 }
 
+void GizmoObjectManipulation::rotate_by_degrees(int axis, double degrees)
+{
+    Selection& selection = m_glcanvas.get_selection();
+    if (selection.is_empty())
+        return;
+
+    Vec3d delta = Vec3d::Zero();
+    delta(axis) = degrees;
+
+    TransformationType transformation_type;
+    transformation_type.set_relative();
+    if (selection.is_single_full_instance())
+        transformation_type.set_independent();
+    if (is_local_coordinates())
+        transformation_type.set_local();
+    if (is_instance_coordinates())
+        transformation_type.set_instance();
+
+    selection.setup_cache();
+    selection.rotate((M_PI / 180.0) * delta, transformation_type);
+    wxGetApp().plater()->take_snapshot(_u8L("Rotate 90"), UndoRedo::SnapshotType::GizmoAction);
+    m_glcanvas.do_rotate("");
+
+    for (int i = 0; i < 3; ++i) {
+        m_cache.rotation_rounded(i)          = DBL_MAX;
+        m_cache.absolute_rotation_rounded(i) = DBL_MAX;
+    }
+    this->UpdateAndShow(true);
+}
+
 void GizmoObjectManipulation::change_absolute_rotation_value(int axis, double value) {
     if (std::abs(m_cache.absolute_rotation_rounded(axis) - value) < EPSILON)
         return;
@@ -1257,6 +1287,18 @@ void GizmoObjectManipulation::do_render_rotate_window(ImGuiWrapper *imgui_wrappe
         if (is_valid) {
             m_last_rotate_type = RotateType::None;
         }
+    }
+
+    // 90 degree quick rotate buttons (Shift+click = -90)
+    ImGui::AlignTextToFramePadding();
+    imgui_wrapper->text(_L("Rotate"));
+    for (int axis = 0; axis < 3; ++axis) {
+        ImGui::SameLine(caption_max + axis * unit_size + (axis + 1) * space_size);
+        ImGui::PushID(axis);
+        if (imgui_wrapper->button(_L("+90"))) {
+            rotate_by_degrees(axis, ImGui::GetIO().KeyShift ? -90.0 : 90.0);
+        }
+        ImGui::PopID();
     }
 
     ImGui::SameLine(caption_max + index_unit * unit_size + (++index) * space_size + end_text_size);
