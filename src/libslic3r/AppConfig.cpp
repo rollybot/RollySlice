@@ -59,7 +59,7 @@ using namespace nlohmann;
 
 namespace Slic3r {
 
-static const std::string VERSION_CHECK_URL = "https://github.com" "rollybot/RollySlice/releases";
+static const std::string VERSION_CHECK_URL = "https://api.github.com/repos/rollybot/RollySlice/releases";
 static const std::string PROFILE_UPDATE_URL = "";
 
 constexpr const char* CONFIG_ORCA_UPDATER_URL = "orca_updater_url";
